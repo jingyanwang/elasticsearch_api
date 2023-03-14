@@ -62,6 +62,32 @@ def build_vector_index(
 	es_session.indices.create(index = index_name, body=mapping_str)
 
 
+
+
+'''
+insert a doc to the index
+'''
+def insert_doc_to_es(
+	r,
+	es_index,
+	document_id_feild,
+	check_value_is_none = True,
+	):
+	try:
+		r1 = r
+		if check_value_is_none is True:
+			r1 = {k: v for k, v in r1.items() if value_is_none(v) is False}
+		r1['_index'] = es_index
+		r1['_id'] = r1[document_id_feild]
+		helpers.bulk(es_session,[r1])
+		r['status'] = 'success'
+		return r
+	except Exception as e:
+		r['status'] = e
+		return r
+
+
+
 '''
 
 data_body = [
