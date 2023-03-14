@@ -126,3 +126,6 @@ results = search_by_vector(
 	return_entity_max_number = 2,
 	)
 ```
+
+
+![results](results.png)
