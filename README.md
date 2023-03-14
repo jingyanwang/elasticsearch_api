@@ -110,6 +110,29 @@ ingest_json_to_es_index(
 	)
 ```
 
+
+## or insert a doc to the index
+
+```python
+
+r = {
+	'document_id': "456",
+	"context_embedding":[0.1,0.2,0.0], 
+	"question_embedding":[0.1,0.2,0.0], 
+	"answer_embedding":[0.1,0.2,0.0], 
+	"context":"context example 1",
+	"question":"question example 2",
+	"answer":"answer example 3",
+	}
+
+insert_doc_to_es(
+	r,
+	check_value_is_none = True,
+	es_index = 'prompt_embedding_index',
+	document_id_feild = 'document_id',
+	)
+```
+
 #### check the data in es
 http://localhost:9466/prompt_embedding_index/_search?pretty=true
 
