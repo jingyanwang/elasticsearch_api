@@ -98,18 +98,25 @@ pd.DataFrame(data_body).to_json(
 ```
 
 
+## inseart the data to index
+
+
+```python
 ingest_json_to_es_index(
 	json_file = 'data.json',
 	es_index = 'prompt_embedding_index',
 	es_session = es_session,
 	document_id_feild = 'document_id',
 	)
+```
 
-
-'''
+#### check the data in es
 http://localhost:9466/prompt_embedding_index/_search?pretty=true
-'''
 
+
+## query by vector similarity 
+
+```python
 results = search_by_vector(
 	index_name = 'prompt_embedding_index',
 	vector_field_name = 'context_embedding',
@@ -118,3 +125,4 @@ results = search_by_vector(
 	similarity_measure = 'euclidean',
 	return_entity_max_number = 2,
 	)
+```
