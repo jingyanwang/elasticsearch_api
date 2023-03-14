@@ -5,7 +5,7 @@ from elasticsearch_api.jim_es_vector_search import *
 # start the es
 
 es_session = start_es(
-	es_path = "/wang/elasticsearch_embedding_search",
+	es_path = "/data/elasticsearch_embedding_search",
 	es_port_number = "9466",
 	es_tcp_port_number = "3671")
 
@@ -86,4 +86,36 @@ results = search_by_vector(
 	es_session = es_session,
 	similarity_measure = 'euclidean',
 	return_entity_max_number = 2,
+	)
+
+'''
+insert a doc
+'''
+
+r = {
+	'document_id': "456",
+	"context_embedding":[0.1,0.2,0.0], 
+	"question_embedding":[0.1,0.2,0.0], 
+	"answer_embedding":[0.1,0.2,0.0], 
+	"context":"context example 1",
+	"question":"question example 2",
+	"answer":"answer example 3",
+	}
+
+insert_doc_to_es(
+	r,
+	check_value_is_none = True,
+	es_index = 'prompt_embedding_index',
+	document_id_feild = 'document_id',
+	)
+
+
+
+results = search_by_vector(
+	index_name = 'prompt_embedding_index',
+	vector_field_name = 'context_embedding',
+	query_vector = [1.0,2.2,3.3],
+	es_session = es_session,
+	similarity_measure = 'euclidean',
+	return_entity_max_number = 3,
 	)
