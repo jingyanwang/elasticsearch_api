@@ -30,7 +30,7 @@ from elasticsearch_api.jim_es_vector_search import *
 # start the es
 
 es_session = start_es(
-	es_path = "/wang/elasticsearch_embedding_search",
+	es_path = "/wang/elasticsearch-7.13.4",
 	es_port_number = "9466",
 	es_tcp_port_number = "3671")
 
